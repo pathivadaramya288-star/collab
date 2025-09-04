@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KDrama Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .dark-mode {
+      background-color: #1c1c1c;
+      color: #eee;
+    }
+
+    header {
+      background-color: #8e44ad;
+      color: #fff;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 220px;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 1rem;
+    }
+
+    nav h2 {
+      font-size: 1.2rem;
+      margin-top: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin: 1rem 0;
+    }
+
+    nav ul li a {
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+    }
+
+    .search-bar {
+      display: flex;
+      margin-bottom: 1.5rem;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .search-bar button {
+      padding: 0.5rem 1rem;
+      background-color: #8e44ad;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .kdrama-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background-color: white;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .dark-mode .card {
+      background-color: #2a2a2a;
+    }
+
+    .toggle-mode {
+      margin-top: 2rem;
+      background-color: #34495e;
+      color: white;
+      padding: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      nav {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>&lt;kdrama&gt; Dashboard</h1>
+  </header>
+
+  <div class="container">
+    <nav>
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#">🏠 Home</a></li>
+        <li><a href="#">🔥 Trending</a></li>
+        <li><a href="#">📅 Upcoming</a></li>
+        <li><a href="#">📂 Categories</a></li>
+        <li><a href="#">⭐ Favorites</a></li>
+      </ul>
+      <button class="toggle-mode" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+    </nav>
+
+    <main>
+      <div class="search-bar">
+        <input type="text" placeholder="Search K-Dramas..." oninput="filterDramas(this.value)">
+        <button>Search</button>
+      </div>
+
+      <h2>Popular K-Dramas</h2>
+      <div class="kdrama-grid" id="dramaList">
+        <div class="card">Crash Landing on You</div>
+        <div class="card">Itaewon Class</div>
+        <div class="card">Goblin</div>
+        <div class="card">Vincenzo</div>
+        <div class="card">Hospital Playlist</div>
+        <div class="card">Extraordinary Attorney Woo</div>
+        <div class="card">My Name</div>
+        <div class="card">Alchemy of Souls</div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+    }
+
+    function filterDramas(query) {
+      const cards = document.querySelectorAll("#dramaList .card");
+      query = query.toLowerCase();
+      cards.forEach(card => {
+        const text = card.textContent.toLowerCase();
+        card.style.display = text.includes(query) ? "block" : "none";
+      });
+    }
+  </script>
+</body>
+</html>
